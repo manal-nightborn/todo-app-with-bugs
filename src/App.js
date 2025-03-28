@@ -18,7 +18,7 @@ function App() {
     if (todos.length > 10) {
       setTodos(todos.slice(0, 10));
     }
-  });
+  },[todos]);
   
   const addTodo = (text) => {
     const newTodo = {
@@ -34,9 +34,15 @@ function App() {
   const toggleComplete = (id) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        todo.completed = !todo.completed; // Mutating state directly - bug
-        return todo;
+        const newTodo = {
+          id: todo.id,
+          text: todo.text,
+          completed: !todo.completed
+        }
+      // Mutating state directly - bug
+        return newTodo;
       }
+
       return todo;
     });
     setTodos(updatedTodos);
@@ -53,7 +59,7 @@ function App() {
     <div className="app">
       <h1>Todo List</h1>
       {/* Bug 5: Rendering an object directly */}
-      <div className="app-info">{appInfo}</div>
+      <div className="app-info">{appInfo.name} {appInfo.version} {appInfo.author}</div>
       
       <TodoForm onAddTodo={addTodo} />
       <TodoList 

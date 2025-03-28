@@ -9,7 +9,7 @@ function TodoForm({ onAddTodo }) {
     if (text.trim() !== '') {
       onAddTodo(text);
       // Bug 3: Form doesn't reset the field after submission
-      // Missing: setText('');
+      setText('');
     }
   };
 
